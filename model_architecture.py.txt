@@ -1,0 +1,59 @@
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv1D, MaxPooling1D, LSTM, Dense, Dropout, BatchNormalization
+
+def build_cnn_lstm_model(input_shape=(7, 1), num_outputs=6):
+    """
+    CNN-LSTM Architecture for Concrete Property Prediction.
+    
+    Inputs (7): Cement, PET Waste, RHA, w/b ratio, Fine Aggregate, Coarse Aggregate, SP
+    Outputs (6): CS, STS, FS, MoE, WA, RCPT
+    """
+    model = Sequential()
+    
+    # ==========================================
+    # 1. CNN Block: Spatial Feature Extraction
+    # ==========================================
+    # First Convolutional Block
+    model.add(Conv1D(filters=64, kernel_size=3, activation='relu', padding='same', input_shape=input_shape))
+    model.add(BatchNormalization())
+    model.add(MaxPooling1D(pool_size=2, padding='same'))
+    
+    # Second Convolutional Block
+    model.add(Conv1D(filters=128, kernel_size=3, activation='relu', padding='same'))
+    model.add(BatchNormalization())
+    
+    # ==========================================
+    # 2. LSTM Block: Pseudo-Sequential Modeling
+    # ==========================================
+    # First LSTM Layer
+    model.add(LSTM(128, return_sequences=True))
+    model.add(Dropout(0.3)) # Dropout rate determined via WOA
+    
+    # Second LSTM Layer
+    model.add(LSTM(64, return_sequences=False))
+    model.add(Dropout(0.3))
+    
+    # ==========================================
+    # 3. Dense Block: Regression Output
+    # ==========================================
+    model.add(Dense(64, activation='relu'))
+    
+    # Final Output Layer (Linear activation for regression of 6 targets)
+    model.add(Dense(num_outputs, activation='linear'))
+    
+    # Compile the model
+    # Note: Learning rate of 0.001 was established as optimal via WOA
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+    model.compile(optimizer=optimizer, loss='mse', metrics=['mae'])
+    
+    return model
+
+if __name__ == "__main__":
+    # Instantiate the model with 7 input features (reshaped for 1D convolution)
+    print("Initializing CNN-LSTM Model for Concrete Property Prediction...")
+    model = build_cnn_lstm_model(input_shape=(7, 1), num_outputs=6)
+    
+    # Print the model summary to verify architecture
+    model.summary()
+    print("\nModel successfully compiled and ready for Whale Optimization Algorithm (WOA) tuning.")
