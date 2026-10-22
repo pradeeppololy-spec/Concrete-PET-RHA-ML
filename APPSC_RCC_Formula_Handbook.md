@@ -372,3 +372,294 @@ Learn one chapter at a time:
 3. Work through one numerical example.
 4. Solve an MCQ without looking at the answer.
 5. Check code clauses/coefficients against the exact standard and your APPSC syllabus.
+
+
+---
+
+## 16. Baahubali worked examples for the principal formulas
+
+These examples illustrate calculation mechanics only. They are deliberately simplified and must not be used as construction designs. Use the APPSC syllabus and the appropriate code edition for exam-specific conditions.
+
+### A. Stress, strain, modulus and self-weight
+
+**A1. Stress, \(\sigma=P/A\)**  
+Baahubali tests a concrete cube-like prism with a load of 180,000 N over a loaded area of 9,000 mm².  
+\[
+\sigma=180000/9000=20\text{ N/mm}^2
+\]  
+Meaning: the average compressive stress is 20 MPa.
+
+**A2. Strain, \(\varepsilon=\Delta L/L\)**  
+A 2,000 mm steel bar stretches by 1 mm while supporting a palace gate.  
+\[
+\varepsilon=1/2000=0.0005
+\]  
+Meaning: the change is small compared with the original length; strain has no unit.
+
+**A3. Concrete modulus estimate, \(E_c=5000\sqrt{f_{ck}}\)**  
+For an M25 example, \(E_c=5000\sqrt{25}=25,000\) MPa.  
+Meaning: this is the code's empirical estimate for normal-weight concrete within its intended scope, not a measured value for every concrete.
+
+**A4. Self-weight, \(W=\gamma V\)**  
+A palace slab panel has a concrete volume of 3 m³. Taking an illustrative unit weight of 25 kN/m³:  
+\[
+W=25\times3=75\text{ kN}
+\]  
+Meaning: its own weight contributes 75 kN before adding imposed loads and finishes.
+
+### B. Beam and elastic section formulas
+
+**B1. Simply supported beam under a central point load, \(M_{max}=PL/4\)**  
+A simply supported demonstration beam has a 20 kN central load and a 4 m span.  
+\[
+M_{max}=20\times4/4=20\text{ kN·m}
+\]  
+Baahubali interpretation: the middle of the beam has the maximum sagging moment for this idealised load case.
+
+**B2. Simply supported beam under UDL, \(M_{max}=wL^2/8\)**  
+A beam spanning 5 m carries a uniform 4 kN/m load.  
+\[
+M_{max}=4\times5^2/8=12.5\text{ kN·m}
+\]
+
+**B3. UDL maximum support shear, \(V_{max}=wL/2\)**  
+For the same beam:  
+\[
+V_{max}=4\times5/2=10\text{ kN}
+\]  
+Meaning: each support reaction is 10 kN in this symmetric case.
+
+**B4. Cantilever with end point load, \(M_{support}=PL\)**  
+A 3 kN hanging ornament is attached at the end of a 2 m cantilever.  
+\[
+M_{support}=3\times2=6\text{ kN·m}
+\]  
+Meaning: the fixed end must resist the largest bending moment.
+
+**B5. Cantilever with full-length UDL, \(M_{support}=wL^2/2\)**  
+A 2 m cantilever carries 2 kN/m uniformly.  
+\[
+M_{support}=2\times2^2/2=4\text{ kN·m}
+\]
+
+**B6. Rectangular second moment of area, \(I=bd^3/12\)**  
+For a rectangular 200 mm wide and 300 mm deep beam section:  
+\[
+I=200\times300^3/12=450,000,000\text{ mm}^4
+\]  
+The depth is cubed, so increasing depth strongly increases bending stiffness.
+
+**B7. Rectangular section modulus, \(Z=bd^2/6\)**  
+For the same section:  
+\[
+Z=200\times300^2/6=3,000,000\text{ mm}^3
+\]  
+It is the bending-resistance indicator for that axis.
+
+**B8. Elastic bending stress, \(\sigma=M/Z\)**  
+If an illustrative bending moment is 30 kN·m and \(Z=3,000,000\text{ mm}^3\): convert moment to 30,000,000 N·mm.  
+\[
+\sigma=30,000,000/3,000,000=10\text{ N/mm}^2
+\]  
+Use this elastic formula only for the applicable elastic analysis; do not confuse it with the ultimate RCC stress block.
+
+### C. Limit-state flexure of beams
+
+**C1. Lever arm, \(z=d-0.42x_u\)**  
+If effective depth \(d=450\) mm and neutral-axis depth \(x_u=150\) mm:  
+\[
+z=450-0.42(150)=387\text{ mm}
+\]  
+Baahubali interpretation: this is the distance between the compression resultant and the tension resultant in the idealised stress block.
+
+**C2. Compression force, \(C=0.36f_{ck}b x_u\)**  
+For illustration, use \(f_{ck}=25\) MPa, \(b=250\) mm, \(x_u=150\) mm:  
+\[
+C=0.36(25)(250)(150)=337,500\text{ N}
+\]  
+This force must be consistent with the tensile force in equilibrium.
+
+**C3. Tension force in steel, \(T=0.87f_yA_{st}\)**  
+For \(f_y=415\) MPa and \(A_{st}=1,000\) mm²:  
+\[
+T=0.87(415)(1000)=361,050\text{ N}
+\]  
+This particular example is not in equilibrium with C2; in a real design, solve for a compatible neutral axis or steel area rather than combining arbitrary values.
+
+**C4. Moment resistance, \(M_u=0.36f_{ck}b x_u(d-0.42x_u)\)**  
+For \(f_{ck}=25\) MPa, \(b=250\) mm, \(x_u=120\) mm, \(d=450\) mm:  
+\[
+M_u=0.36(25)(250)(120)(450-0.42(120))
+\]
+\[
+M_u=270,000(399.6)=107,892,000\text{ N·mm}=107.9\text{ kN·m}
+\]  
+This is valid only when the assumed section, material grade and neutral axis meet code conditions.
+
+**C5. Approximate tension steel from \(A_{st}\approx M_u/(0.87f_yz)\)**  
+For an illustrative \(M_u=100\) kN·m, \(f_y=415\) MPa, \(z=400\) mm:  
+\[
+A_{st}\approx\frac{100\times10^6}{0.87(415)(400)}\approx692\text{ mm}^2
+\]  
+Then verify neutral axis, ductility, minimum/maximum reinforcement and detailing under IS 456.
+
+**C6. Minimum beam steel, \(A_{st,min}=0.85bd/f_y\)**  
+For \(b=250\) mm, \(d=450\) mm, \(f_y=415\) MPa:  
+\[
+A_{st,min}=0.85(250)(450)/415\approx230\text{ mm}^2
+\]  
+This is a minimum reinforcement check, not the complete flexural design.
+
+**C7. Maximum beam tension steel, \(A_{st,max}=0.04bD\)**  
+For \(b=250\) mm and overall depth \(D=500\) mm:  
+\[
+A_{st,max}=0.04(250)(500)=5,000\text{ mm}^2
+\]  
+The concrete must still be detailed and reinforced as required; this upper limit is not a target steel area.
+
+### D. Shear and development length
+
+**D1. Nominal shear stress, \(\tau_v=V_u/(bd)\)**  
+For \(V_u=100\) kN, \(b=250\) mm and \(d=450\) mm:  
+\[
+\tau_v=100,000/(250\times450)=0.889\text{ N/mm}^2
+\]  
+Compare with the applicable code strength table and maximum shear stress limit.
+
+**D2. Tension reinforcement percentage, \(p_t=100A_{st}/(bd)\)**  
+For \(A_{st}=800\) mm², \(b=250\) mm, \(d=450\) mm:  
+\[
+p_t=100(800)/(250\times450)=0.711\%
+\]  
+Use this value with the applicable IS 456 shear-strength table.
+
+**D3. Stirrups, \(V_{us}=0.87f_yA_{sv}d/s\)**  
+Assume vertical stirrups with \(f_y=415\) MPa, total area of legs \(A_{sv}=157\) mm², effective depth \(d=450\) mm, spacing \(s=200\) mm:  
+\[
+V_{us}=0.87(415)(157)(450)/200\approx127,800\text{ N}=127.8\text{ kN}
+\]  
+Check the actual code limits, shear demand, stirrup spacing and maximum shear stress.
+
+**D4. Development length, \(L_d=\phi\sigma_s/(4\tau_{bd})\)**  
+Suppose a 16 mm bar has \(\sigma_s=0.87(415)=361.05\) MPa and an illustrative design bond stress of 1.92 MPa:  
+\[
+L_d=16(361.05)/(4(1.92))\approx752\text{ mm}
+\]  
+The bond stress must be selected from the correct code table with relevant bar type and concrete grade modifications. The numeric result is only an illustration.
+
+### E. Slabs
+
+**E1. One-way slab criterion**  
+For a rectangular panel with spans 4 m and 8.5 m:  
+\[
+L_y/L_x=8.5/4=2.125>2
+\]  
+It generally acts one-way if the support conditions fit the rule. Baahubali analogy: the slab primarily spans across the shorter direction.
+
+**E2. One-way simply supported moment, \(M=wL^2/8\)**  
+For a one-metre strip with design load 8 kN/m and span 4 m:  
+\[
+M=8(4^2)/8=16\text{ kN·m per m strip}
+\]  
+Use effective span and the load basis required by the applicable design method.
+
+**E3. Cantilever slab moment, \(M=wL^2/2\)**  
+For a 1.5 m cantilever strip with \(w=6\) kN/m:  
+\[
+M=6(1.5^2)/2=6.75\text{ kN·m}
+\]  
+The top reinforcement near the support is important for the negative moment region.
+
+**E4. Slab effective depth, \(d=D-\text{cover}-\phi/2\)**  
+For overall thickness \(D=150\) mm, nominal cover 20 mm and main bar diameter 10 mm:  
+\[
+d=150-20-5=125\text{ mm}
+\]  
+For multiple layers, use the actual centroid of the tension reinforcement.
+
+**E5. Minimum slab steel**  
+For a 1 m wide strip, slab thickness 150 mm and high-strength deformed bars at 0.12%:  
+\[
+A_{s,min}=0.0012(1000)(150)=180\text{ mm}^2/\text{m}
+\]  
+Use the exact percentage and detailing limits required by the code and question.
+
+### F. Columns
+
+**F1. Simplified short tied-column capacity, \(P_u=0.4f_{ck}A_c+0.67f_yA_{sc}\)**  
+For an illustrative case: \(f_{ck}=25\) MPa, \(A_c=90,000\) mm², \(f_y=415\) MPa and \(A_{sc}=1,000\) mm²:  
+\[
+P_u=0.4(25)(90,000)+0.67(415)(1,000)
+\]
+\[
+P_u=900,000+278,050=1,178,050\text{ N}\approx1,178\text{ kN}
+\]  
+This expression applies only to the stated code case; check minimum eccentricity, slenderness and moment effects.
+
+**F2. Steel percentage in a column, \(p=100A_{sc}/A_g\)**  
+If steel area is 1,600 mm² and gross column area is 400,000 mm²:  
+\[
+p=100(1600)/400000=0.4\%
+\]  
+This is below the common 0.8% minimum in IS 456; the example therefore does not meet that usual minimum reinforcement condition.
+
+**F3. Minimum eccentricity, \(e_{min}=l/500+D/30\), not less than 20 mm**  
+Using illustrative unsupported length \(l=3000\) mm and dimension \(D=300\) mm:  
+\[
+e_{min}=3000/500+300/30=6+10=16\text{ mm}
+\]  
+Since this is less than 20 mm, the minimum eccentricity would be 20 mm. Use the exact code definitions of the relevant length and dimension.
+
+**F4. Slenderness ratio, \(\lambda=l_e/D\)**  
+If effective length is 3,000 mm and the corresponding dimension is 300 mm:  
+\[
+\lambda=3000/300=10
+\]  
+Check both axes and apply the relevant code's definition and classification criteria.
+
+### G. Mix design
+
+**G1. Water-cement ratio, \(w/c=W/C\)**  
+If Baahubali's trial mix uses 180 kg water and 360 kg cement:  
+\[
+w/c=180/360=0.50
+\]  
+The chosen value must satisfy strength, workability and durability requirements; it is not chosen from strength alone.
+
+**G2. Target mean strength, \(f'_{ck}=f_{ck}+1.65s\)**  
+For M25 and standard deviation \(s=4\) MPa (illustrative):  
+\[
+f'_{ck}=25+1.65(4)=31.6\text{ MPa}
+\]  
+Use the standard deviation selection procedure in IS 10262 for the actual mix design.
+
+**G3. Concrete volume and mass, \(m=\rho V\)**  
+If an ingredient has a mass of 300 kg in a batch and occupies an absolute volume of 0.10 m³, then its implied density is \(300/0.10=3000\) kg/m³. In mix design, calculate each ingredient's absolute volume and ensure the batch yields the intended concrete volume.
+
+### H. Working Stress Method (historical RCC theory)
+
+**H1. Service stress check**  
+If a hypothetical permissible compressive stress is 7 N/mm² and calculated service stress is 5.5 N/mm², then \(5.5<7\), so this particular check passes. Baahubali analogy: the service-load stresses stay below the chosen allowable limit.
+
+**H2. Modular ratio, \(m=280/(3\sigma_{cbc})\)**  
+If the historical permissible bending compressive stress \(\sigma_{cbc}=7\) N/mm²:  
+\[
+m=280/(3\times7)=13.33
+\]  
+Use only in the relevant historical WSM context, and verify the permitted concrete stress and code edition.
+
+**H3. Transformed cracked-section neutral axis, \(bx^2/2=mA_{st}(d-x)\)**  
+For a hypothetical beam with \(b=250\) mm, \(m=13.33\), \(A_{st}=800\) mm² and \(d=450\) mm, the equation becomes:  
+\[
+125x^2=10,664(450-x)
+\]  
+Expand and solve the quadratic for its positive physical root. This equation is an elastic cracked-section WSM model, not the limit-state neutral-axis formula.
+
+## 17. Final exam strategy
+When a formula appears, do these checks before calculating:
+1. Identify the topic: flexure, shear, slab, column, bond, serviceability, mix design or WSM.
+2. Identify the design method: service-load WSM or limit-state design.
+3. Convert units before substitution.
+4. Check whether the formula needs a table or coefficient.
+5. Calculate, then check code limits and detailing requirements.
+6. In MCQs, reject answers with incorrect units or inappropriate design assumptions first.
